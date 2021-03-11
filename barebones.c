@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 #define MAX_SIZE (16 * 1024 * 1024)
 
@@ -14,7 +15,7 @@ int get_big_endian(const char *buf)
 /*
     methods validate() and check_header() exist solely to make sure non-png files don't produce a segfault
 */
-void validate(int val, const char *msg)
+void validate(bool val, const char *msg)
 {
     if (!val)
     {
@@ -94,7 +95,7 @@ int main(int argc, char **argv)
 
             pos += 12 + len;
         }
-        printf("File had no ancillary chunks... Letting file through.\n");
+        printf("File OK\n");
         fclose(f);
         free(buf);
         return 0;

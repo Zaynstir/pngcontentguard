@@ -5,12 +5,21 @@
 #change the 'd' variable to reflect the directory of the files relative to the compiled file
 #then run this script in the same directory directory as the compiled file
 
-d='../PngSuite'
+d='../testsuite'
+f='./OKfiles'
 
 echo "" > temp.txt
 
 for entry in "$d"/*
 do
-    cmd=$(./barebones "$entry") 
-    echo "$entry => $cmd" >> temp.txt
+    cmd=$(./barebones "$entry")
+    echo $cmd
+    if echo "$cmd" | grep -q "File OK"; then
+	cp "$entry" OKfiles/
+    fi
+done
+
+for entry in "$f"/*
+do
+    fim $entry
 done
